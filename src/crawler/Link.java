@@ -5,17 +5,17 @@ import java.util.*;
 public class Link {
 	String url;
 	int inLinksCount;
-	Set<String> inLinks;
+	Set<Link> inLinks;
 	Link(){
 		inLinksCount=0;
-		inLinks=new HashSet<String>();
+		inLinks=new HashSet<Link>();
 	}
 	Link(String _url){
 		url=_url;
 		inLinksCount=0;
-		inLinks=new HashSet<String>();
+		inLinks=new HashSet<Link>();
 	}
-	synchronized void addInLink(String inLink) {
+	synchronized void addInLink(Link inLink) {
 		inLinksCount++;
 		inLinks.add(inLink);
 	}
@@ -42,5 +42,8 @@ public class Link {
 			return false;
 		return true;
 	}
-	
+	void merge(Link link){
+		inLinksCount+=link.inLinksCount;
+		inLinks.addAll(link.inLinks);
+	}
 }
